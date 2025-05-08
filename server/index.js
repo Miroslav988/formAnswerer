@@ -80,7 +80,6 @@ app.post("/api/submit-request", async (req, res) => {
 - Матрица: ${counts.matrix || 0}
 - Радио кнопки: ${counts.radio || 0}
 - Чекбоксы: ${counts.checkbox || 0}
-- Обязательные открытые вопросы: ${counts.open || 0}
 Примерная стоимость: ${totalCost.toFixed(2)} руб.
 ${approximateCostMessage}
     `;
