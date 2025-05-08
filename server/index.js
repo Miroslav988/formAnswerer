@@ -1,17 +1,22 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { parseGoogleForm } from "./puppeteerHelper.js";
 import { sendTelegramMessage } from "./telegramBot.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(bodyParser.json());
+
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, "../vue-form-app/dist")));
 
 app.post("/api/submit-request", async (req, res) => {
   const { formUrl, telegramContact, answerCount, comment } = req.body;
@@ -151,6 +156,11 @@ app.post("/api/calculate-cost", async (req, res) => {
     console.error("Ошибка при расчете стоимости:", error);
     res.status(500).json({ message: "Ошибка сервера при расчете стоимости" });
   }
+});
+
+// Serve frontend for all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../vue-form-app/dist/index.html"));
 });
 
 app.listen(PORT, () => {
