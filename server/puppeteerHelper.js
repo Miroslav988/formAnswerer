@@ -1,7 +1,10 @@
 import puppeteer from "puppeteer";
 
 export async function parseGoogleForm(formUrl) {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
   const page = await browser.newPage();
 
   try {
