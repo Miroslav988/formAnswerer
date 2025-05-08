@@ -35,8 +35,6 @@ export async function parseGoogleForm(formUrl) {
           (await question.$$('div[role="checkbox"]')).length > 0;
         const hasMatrix =
           (await question.$$('div[role="radiogroup"]')).length > 1;
-        const hasTextInput =
-          (await question.$('input[type="text"], textarea')) !== null;
 
         let type = "open";
         if (hasMatrix) {
@@ -45,8 +43,6 @@ export async function parseGoogleForm(formUrl) {
           type = "radio";
         } else if (hasCheckbox) {
           type = "checkbox";
-        } else if (hasTextInput) {
-          type = "open";
         }
 
         // Extract options if applicable
