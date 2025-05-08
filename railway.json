@@ -1,11 +1,6 @@
 {
-  "build": {
-    "builder": "nodejs",
-    "buildCommand": "cd vue-form-app && npm install && npm run build && cd ../server && npm install"
-  },
-  "start": {
-    "startCommand": "node server/index.js"
-  },
+  "buildCommand": "cd vue-form-app && npm install && npm run build && cd ../server && npm install",
+  "startCommand": "node server/index.js",
   "rootDirectory": ".",
   "env": {
     "PORT": "8080"
