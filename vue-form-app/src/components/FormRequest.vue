@@ -130,21 +130,18 @@ export default {
       this.loading = true;
       try {
         // Отправка данных на backend API
-        const response = await fetch(
-          "http://localhost:8080/api/submit-request",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              formUrl: this.formUrl,
-              telegramContact: this.telegramContact,
-              answerCount: this.answerCount,
-              comment: this.comment,
-            }),
-          }
-        );
+        const response = await fetch("/api/submit-request", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            formUrl: this.formUrl,
+            telegramContact: this.telegramContact,
+            answerCount: this.answerCount,
+            comment: this.comment,
+          }),
+        });
         const data = await response.json();
         if (response.ok) {
           this.successMessage = "Заявка успешно отправлена!";
